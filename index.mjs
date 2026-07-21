@@ -3,8 +3,13 @@ import express from "express";
 const app = express();
 const PORT = 5000;
 
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+
+
 app.get("/", (req, res) => {
-  res.send("Hello, Aquarium World!");
+  res.render("home");
 });
 
 app.listen(PORT, () => {
