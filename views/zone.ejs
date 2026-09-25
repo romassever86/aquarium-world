@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<h1><%= zone.name %></h1>
+<p><%= zone.description %></p>
+
+<h2>Exhibits in this zone</h2>
+<% exhibits.forEach(exhibit => { %>
+  <article>
+    <h3><%= exhibit.name %></h3>
+    <p><%= exhibit.description %></p>
+  </article>
+<% }) %>
+
+<p><a href="/">&larr; Back to all zones</a></p>
+
+<%- include('partials/footer') %>
