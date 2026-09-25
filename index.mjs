@@ -10,6 +10,17 @@ app.set("views", "views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+async function findEvents(year, category) {
+  let sql = "SELECT * FROM events WHERE strftime('%Y', event_date) = ?";
+  const params = [String(year)];
+  if (category && category !== "all") {
+    sql += " AND category = ?";
+    params.push(category);
+  }
+  sql += " ORDER BY event_date ASC";
+  return all(sql, params);
+}
+
 app.get("/", async (req, res) => {
   const zones = await all("SELECT * FROM zones");
   res.render("home", { zones });
@@ -78,6 +89,41 @@ app.get("/api/spotlight", async (req, res) => {
      LIMIT 1`
   );
   res.json(exhibit);
+});
+
+app.get("/events", async (req, res) => {
+  const currentYear = new Date().getFullYear();
+  const year = req.query.year || currentYear;
+  const category = req.query.category || "all";
+  const events = await findEvents(year, category);
+  const categoryRows = await all("SELECT DISTINCT category FROM events ORDER BY category");
+  const categories = categoryRows.map(row => row.category);
+  res.render("events", {
+    events,
+    categories,
+    selectedYear: Number(year),
+    selectedCategory: category,
+    currentYear
+  });
+});
+
+app.get("/api/events", async (req, res) => {
+  const currentYear = new Date().getFullYear();
+  const year = req.query.year || currentYear;
+  const category = req.query.category || "all";
+  const events = await findEvents(year, category);
+  res.json(events);
+});
+
+app.get("/events/:id", async (req, res) => {
+  const event = await get("SELECT * FROM events WHERE id = ?", [req.params.id]);
+  if (!event) {
+    return res.status(404).send("Event not found");
+  }
+  const eventDate = new Date(event.event_date);
+  const today = new Date();
+  const hasOccurred = eventDate.setHours(0, 0, 0, 0) < today.setHours(0, 0, 0, 0);
+  res.render("event", { event, hasOccurred });
 });
 
 app.listen(PORT, () => {

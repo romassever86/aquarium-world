@@ -23,6 +23,14 @@ async function setup() {
     message TEXT NOT NULL
   )`);
 
+  await run(`CREATE TABLE IF NOT EXISTS events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    category TEXT NOT NULL,
+    event_date TEXT NOT NULL,
+    description TEXT NOT NULL
+  )`);
+
   const coralReef = await run(
     "INSERT INTO zones (name, slug, description) VALUES (?, ?, ?)",
     ["Coral Reef Zone", "coral-reef", "A living rainbow beneath the waves, home to over 80 species of fish and coral."]
@@ -78,6 +86,31 @@ async function setup() {
     "INSERT INTO exhibits (zone_id, name, description) VALUES (?, ?, ?)",
     [rivers.lastID, "Otter Lookout", "Our family of Asian short-clawed otters, with daily feeding talks."]
   );
+
+  const today = new Date();
+  function daysFromToday(offset) {
+    const d = new Date(today);
+    d.setDate(d.getDate() + offset);
+    return d.toISOString().slice(0, 10);
+  }
+
+  const events = [
+    ["Coral Spawning Night", "Seasonal celebrations", daysFromToday(-120), "A rare after-dark viewing of the reef's annual coral spawning event."],
+    ["Deep Sea Guest Lecture", "Educational talks", daysFromToday(-40), "Marine biologist Dr Imani Okafor shares footage from three submarine expeditions."],
+    ["Rockpool Family Day", "Family activities", daysFromToday(-10), "A hands-on day at the Coastal Rockpools with guided creature hunts."],
+    ["After-Dark Torchlight Tour", "Family activities", daysFromToday(14), "Explore the Deep Sea Trench by torchlight after closing time."],
+    ["Conservation Workshop", "Educational talks", daysFromToday(30), "Help our aquarists prepare coral fragments for reef restoration."],
+    ["Summer Marine Festival", "Seasonal celebrations", daysFromToday(60), "A week of talks, trails and activities celebrating ocean life."],
+    ["Otter Feeding Talk Special", "Family activities", daysFromToday(90), "An extended feeding session and Q&A with our otter keepers."],
+    ["River Guardians Clean-Up", "Educational talks", daysFromToday(150), "Join a supervised river shoreline clean-up with our conservation team."]
+  ];
+
+  for (const [title, category, date, description] of events) {
+    await run(
+      "INSERT INTO events (title, category, event_date, description) VALUES (?, ?, ?, ?)",
+      [title, category, date, description]
+    );
+  }
 
   console.log("Database created and seeded.");
   process.exit(0);

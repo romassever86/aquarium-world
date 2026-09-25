@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+
+<h1><%= event.title %></h1>
+
+<% if (hasOccurred) { %>
+  <p class="event-badge past">This event has already taken place</p>
+<% } else { %>
+  <p class="event-badge upcoming">Upcoming event</p>
+<% } %>
+
+<p><strong>Date:</strong> <%= event.event_date %></p>
+<p><strong>Category:</strong> <%= event.category %></p>
+<p><%= event.description %></p>
+
+<p><a href="/events">&larr; Back to all events</a></p>
+
+<%- include('partials/footer') %>
