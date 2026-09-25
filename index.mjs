@@ -50,6 +50,10 @@ app.post("/contact", (req, res) => {
   res.render("contact", { errors: null, submitted: true });
 });
 
+app.get("/activity", (req, res) => {
+  res.render("activity");
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

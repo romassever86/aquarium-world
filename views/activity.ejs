@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<h1>Coral Reef Facts Game</h1>
+<p>The <a href="/zones/coral-reef">Coral Reef Zone</a> is full of surprises. Click each tile to reveal a fact &mdash; can you uncover them all?</p>
+
+<p id="progress">0 of 6 facts revealed</p>
+
+<div class="fact-grid">
+  <button class="fact-tile" data-fact="A single coral reef can be home to thousands of different species.">?</button>
+  <button class="fact-tile" data-fact="Coral is a living animal, not a plant or a rock.">?</button>
+  <button class="fact-tile" data-fact="Reefs cover less than 1% of the ocean floor but support 25% of all marine life.">?</button>
+  <button class="fact-tile" data-fact="The Great Barrier Reef is the largest living structure on Earth.">?</button>
+  <button class="fact-tile" data-fact="Clownfish and sea anemones protect each other in a partnership.">?</button>
+  <button class="fact-tile" data-fact="Coral gets its colour from tiny algae living inside it.">?</button>
+</div>
+
+<p id="completion-message" class="success-message" hidden>Well done! You revealed every reef fact.</p>
+
+<script src="/js/activity.js"></script>
+
+<%- include('partials/footer') %>
