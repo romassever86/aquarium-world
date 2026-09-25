@@ -16,6 +16,13 @@ async function setup() {
     FOREIGN KEY (zone_id) REFERENCES zones(id)
   )`);
 
+  await run(`CREATE TABLE IF NOT EXISTS messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    message TEXT NOT NULL
+  )`);
+
   const coralReef = await run(
     "INSERT INTO zones (name, slug, description) VALUES (?, ?, ?)",
     ["Coral Reef Zone", "coral-reef", "A living rainbow beneath the waves, home to over 80 species of fish and coral."]
