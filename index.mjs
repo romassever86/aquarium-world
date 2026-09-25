@@ -54,6 +54,32 @@ app.get("/activity", (req, res) => {
   res.render("activity");
 });
 
+app.get("/api/search", async (req, res) => {
+  const query = (req.query.q || "").trim();
+  if (query.length === 0) {
+    return res.json([]);
+  }
+  const results = await all(
+    `SELECT exhibits.name, exhibits.description, zones.slug AS zone_slug, zones.name AS zone_name
+     FROM exhibits
+     JOIN zones ON zones.id = exhibits.zone_id
+     WHERE exhibits.name LIKE ? OR exhibits.description LIKE ?`,
+    [`%${query}%`, `%${query}%`]
+  );
+  res.json(results);
+});
+
+app.get("/api/spotlight", async (req, res) => {
+  const exhibit = await get(
+    `SELECT exhibits.name, exhibits.description, zones.slug AS zone_slug, zones.name AS zone_name
+     FROM exhibits
+     JOIN zones ON zones.id = exhibits.zone_id
+     ORDER BY RANDOM()
+     LIMIT 1`
+  );
+  res.json(exhibit);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
