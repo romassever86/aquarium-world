@@ -5,7 +5,8 @@ async function setup() {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     slug TEXT NOT NULL UNIQUE,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    image TEXT NOT NULL
   )`);
 
   await run(`CREATE TABLE IF NOT EXISTS exhibits (
@@ -32,23 +33,23 @@ async function setup() {
   )`);
 
   const coralReef = await run(
-    "INSERT INTO zones (name, slug, description) VALUES (?, ?, ?)",
-    ["Coral Reef Zone", "coral-reef", "A living rainbow beneath the waves, home to over 80 species of fish and coral."]
+    "INSERT INTO zones (name, slug, description, image) VALUES (?, ?, ?, ?)",
+    ["Coral Reef Zone", "coral-reef", "A living rainbow beneath the waves, home to over 80 species of fish and coral.", "/images/coral-reef.jpg"]
   );
 
   const deepSea = await run(
-    "INSERT INTO zones (name, slug, description) VALUES (?, ?, ?)",
-    ["Deep Sea Trench", "deep-sea-trench", "Descend into the midnight zone and meet creatures that make their own light."]
+    "INSERT INTO zones (name, slug, description, image) VALUES (?, ?, ?, ?)",
+    ["Deep Sea Trench", "deep-sea-trench", "Descend into the midnight zone and meet creatures that make their own light.", "/images/deep-sea.jpg"]
   );
 
   const rockpools = await run(
-    "INSERT INTO zones (name, slug, description) VALUES (?, ?, ?)",
-    ["Coastal Rockpools", "coastal-rockpools", "The seashore, up close and hands-on - roll up your sleeves and explore."]
+    "INSERT INTO zones (name, slug, description, image) VALUES (?, ?, ?, ?)",
+    ["Coastal Rockpools", "coastal-rockpools", "The seashore, up close and hands-on - roll up your sleeves and explore.", "/images/rockpools.jpg"]
   );
 
   const rivers = await run(
-    "INSERT INTO zones (name, slug, description) VALUES (?, ?, ?)",
-    ["Rivers & Rainforest", "rivers-rainforest", "Follow fresh water from mountain to mangrove through a humid rainforest trail."]
+    "INSERT INTO zones (name, slug, description, image) VALUES (?, ?, ?, ?)",
+    ["Rivers & Rainforest", "rivers-rainforest", "Follow fresh water from mountain to mangrove through a humid rainforest trail.", "/images/rivers.jpg"]
   );
 
   await run(

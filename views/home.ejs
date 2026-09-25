@@ -19,6 +19,7 @@
 <h2>Our Zones</h2>
 <% zones.forEach(zone => { %>
   <article>
+    <img src="<%= zone.image %>" alt="<%= zone.name %>">
     <h3><%= zone.name %></h3>
     <p><%= zone.description %></p>
     <a href="/zones/<%= zone.slug %>">Visit this zone</a>
