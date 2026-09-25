@@ -53,7 +53,7 @@ a:focus, button:focus, input:focus, textarea:focus {
 
 /* ===== Opening times banner ===== */
 .times-banner {
-  background: #14a0c4;
+  background: #0d7a99;
   color: #fff;
   text-align: center;
   font-weight: bold;
@@ -117,7 +117,7 @@ article a {
 
 /* ===== Buttons ===== */
 button, .button {
-  background: #14a0c4;
+  background: #0d7a99;
   color: #fff;
   border: none;
   padding: 0.7rem 1.4rem;
@@ -128,7 +128,7 @@ button, .button {
 }
 
 button:hover, .button:hover {
-  background: #0d7a99;
+  background: #0a3d4f;
 }
 
 /* ===== Contact form ===== */

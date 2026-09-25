@@ -18,21 +18,25 @@
 <% } %>
 
 <form id="contact-form" action="/contact" method="POST" novalidate>
-  <div class="form-field">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
-  </div>
+  <fieldset>
+    <legend>Send us a message</legend>
 
-  <div class="form-field">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" aria-describedby="email-hint" required>
-    <p id="email-hint">We'll only use this to reply to your message.</p>
-  </div>
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
 
-  <div class="form-field">
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
-  </div>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" aria-describedby="email-hint" required>
+      <p id="email-hint">We'll only use this to reply to your message.</p>
+    </div>
+
+    <div class="form-field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+  </fieldset>
 
   <button type="submit">Send Message</button>
 </form>
