@@ -17,12 +17,20 @@
 </section>
 
 <h2>Our Zones</h2>
+<%
+  const zoneAltText = {
+    "coral-reef": "Underwater view of a vibrant coral reef with tropical fish",
+    "deep-sea-trench": "A dark deep-sea scene with bioluminescent creatures",
+    "coastal-rockpools": "A shallow rockpool with starfish and shells among the rocks",
+    "rivers-rainforest": "A lush river winding through a green rainforest"
+  };
+%>
 <% zones.forEach(zone => { %>
   <article>
-    <img src="<%= zone.image %>" alt="<%= zone.name %>">
+    <img src="<%= zone.image %>" alt="<%= zoneAltText[zone.slug] %>">
     <h3><%= zone.name %></h3>
     <p><%= zone.description %></p>
-    <a href="/zones/<%= zone.slug %>">Visit this zone</a>
+    <a href="/zones/<%= zone.slug %>">Visit this zone: <%= zone.name %></a>
   </article>
 <% }) %>
 

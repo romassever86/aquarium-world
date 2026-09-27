@@ -1,6 +1,14 @@
 <%- include('partials/header') %>
 
-<img src="<%= zone.image %>" alt="<%= zone.name %>">
+<%
+  const zoneAltText = {
+    "coral-reef": "Underwater view of a vibrant coral reef with tropical fish",
+    "deep-sea-trench": "A dark deep-sea scene with bioluminescent creatures",
+    "coastal-rockpools": "A shallow rockpool with starfish and shells among the rocks",
+    "rivers-rainforest": "A lush river winding through a green rainforest"
+  };
+%>
+<img src="<%= zone.image %>" alt="<%= zoneAltText[zone.slug] %>">
 <h1><%= zone.name %></h1>
 <p><%= zone.description %></p>
 
